@@ -66,16 +66,17 @@
   (apply merge ms))
 
 (defn- read-env []
-  #?(:clj (merge-env
-           (read-env-file ".lein-env")
-           (read-env-file (io/resource ".boot-env"))
-           (read-system-env)
-           (read-system-props))
-     :cljs (if nodejs?
-             (merge-env
-              (read-env-file ".lein-env")
-              (read-system-env))
-             {})))
+  (delay
+    #?(:clj (merge-env
+             (read-env-file ".lein-env")
+             (read-env-file (io/resource ".boot-env"))
+             (read-system-env)
+             (read-system-props))
+       :cljs (if nodejs?
+               (merge-env
+                (read-env-file ".lein-env")
+                (read-system-env))
+               {}))))
 
-(defonce ^{:doc "A map of environment variables."}
+(defonce ^{:doc "A delay of map of environment variables."}
   env (read-env))

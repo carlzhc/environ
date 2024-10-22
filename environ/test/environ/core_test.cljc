@@ -24,11 +24,11 @@
 
 #?(:clj (defn refresh-env []
           (refresh-ns)
-          (var-get (find-var 'environ.core/env))))
+          @(var-get (find-var 'environ.core/env))))
 
 #?(:cljs (defn refresh-env []
            (set! environ/env (environ/read-env))
-           environ/env))
+           @environ/env))
 
 #?(:cljs (defn- spit [f data]
            (.writeFileSync fs f data)))
