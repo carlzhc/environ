@@ -1,4 +1,4 @@
-(defproject environ "2.0.0"
+(defproject com.github.carlzhc/environ "2.0.0"
   :description "Library for accessing environment variables"
   :url "https://github.com/carlzhc/environ"
   :scm {:dir ".."}
